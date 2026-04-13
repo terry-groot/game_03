@@ -1,0 +1,19 @@
+{
+  "name": "mahjong-game",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "npm run build -w packages/shared && concurrently -n server,client -c cyan,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w packages/shared && npm run build -w server && npm run build -w client",
+    "start": "node server/dist/index.js",
+    "type-check": "npm run build -w packages/shared && tsc --noEmit -p server/tsconfig.json && tsc --noEmit -p client/tsconfig.json"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

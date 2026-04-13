@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "paths": {
+      "@mahjong/shared": ["../packages/shared/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*", "../packages/shared/src/**/*"],
+  "ts-node": {
+    "transpileOnly": true,
+    "paths": {
+      "@mahjong/shared": ["../packages/shared/src/index.ts"]
+    }
+  }
+}
