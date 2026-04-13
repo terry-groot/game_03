@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* Base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #1a5c38;
+  font-family: 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif;
+  color: #fff;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tile styles */
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #fffff0;
+  border-radius: 4px;
+  border: 1px solid #c8b89a;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.35);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  aspect-ratio: 3/4;
+}
+
+.tile:active {
+  transform: scale(0.95);
+}
+
+.tile.selected {
+  transform: translateY(-10px);
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.5);
+  border-color: #f6c90e;
+}
+
+.tile.face-down {
+  background: linear-gradient(135deg, #2d6a4f 25%, #1b4332 25%, #1b4332 50%, #2d6a4f 50%, #2d6a4f 75%, #1b4332 75%);
+  background-size: 8px 8px;
+  cursor: default;
+}
+
+.tile-man { color: #b00000; }
+.tile-pin { color: #0055cc; }
+.tile-sou { color: #006600; }
+.tile-wind, .tile-dragon { color: #333; }
+.tile-flower { color: #cc6600; }
+.tile-chun { color: #cc0000; }
+.tile-hatsu { color: #006600; }
+.tile-haku { color: #555; }
+
+.tile-value {
+  font-size: 0.5em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 1px;
+  align-self: flex-start;
+}
+
+.tile-suit {
+  font-size: 1.4em;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Scrollbar hide */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Countdown arc animation */
+@keyframes countdown-shrink {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 220; }
+}
+
+/* Tile draw animation */
+@keyframes tile-appear {
+  from { transform: scale(0.7) translateY(-5px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.tile-new {
+  animation: tile-appear 0.25s ease-out;
+}
+
+/* Win modal */
+@keyframes win-pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.03); }
+}
+
+.win-pulse {
+  animation: win-pulse 1s ease-in-out infinite;
+}
