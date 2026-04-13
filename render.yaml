@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mahjong-game
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: CORS_ORIGIN
+        value: https://mahjong-game.onrender.com

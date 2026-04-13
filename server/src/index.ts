@@ -24,7 +24,13 @@ app.use(cors({ origin: [CORS_ORIGIN, 'http://localhost:5173'] }));
 app.use(express.json());
 
 // Serve built client in production
-const clientDist = path.join(__dirname, '../../client/dist');
+// In production (after `npm run build`), client is copied to server/dist/public
+// In development, Vite runs separately on port 5173
+const isProd = process.env.NODE_ENV === 'production';
+const clientDist = isProd
+  ? path.join(__dirname, 'public')
+  : path.join(__dirname, '../../client/dist');
+
 app.use(express.static(clientDist));
 app.get('/{*path}', (_req, res) => {
   res.sendFile(path.join(clientDist, 'index.html'));
